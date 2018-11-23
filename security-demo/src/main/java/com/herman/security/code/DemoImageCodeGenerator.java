@@ -9,7 +9,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @author hsh
  * @create 2018-11-20 14:42
  **/
-//@Component("imageCodeGenerator")
+//@Component("imageValidateCodeGenerator")
 public class DemoImageCodeGenerator /*implements ValidateCodeGenerator*/{
 
 //    @Override

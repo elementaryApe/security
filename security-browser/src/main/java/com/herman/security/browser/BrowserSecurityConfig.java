@@ -1,5 +1,6 @@
 package com.herman.security.browser;
 
+import com.herman.security.core.authentication.AbstractChannelSecurityConfig;
 import com.herman.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.properties.SecurityProperties;
@@ -66,14 +67,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        new AbstractChannelSecurityConfig(successHandler,failureHandler).applyPasswordAuthenticationConfig(http);
-        http.formLogin()//表单登录
-                .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)//登录页面
-                .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)//登录提交请求
-                .successHandler(successHandler)//成功时
-                .failureHandler(failureHandler)//失败时
-                .and()
-        .apply(validateCodeSecurityConfig)
+        new AbstractChannelSecurityConfig(successHandler,failureHandler).applyPasswordAuthenticationConfig(http);
+        http.apply(validateCodeSecurityConfig)
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()

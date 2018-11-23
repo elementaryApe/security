@@ -1,7 +1,7 @@
 package com.herman.security.core.validate.code.base;
 
 import com.herman.security.core.properties.SecurityProperties;
-import com.herman.security.core.validate.code.image.ImageCodeGenerator;
+import com.herman.security.core.validate.code.image.ImageValidateCodeGenerator;
 import com.herman.security.core.validate.code.sms.DefaultSmsCodeSender;
 import com.herman.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class ValidateCodeBeanConfig {
     private SecurityProperties securityProperties;
 
     @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ValidateCodeGenerator imageCodeGenerator() {
-        ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
+    @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
+    public ValidateCodeGenerator imageValidateCodeGenerator() {
+        ImageValidateCodeGenerator codeGenerator = new ImageValidateCodeGenerator();
         codeGenerator.setSecurityProperties(securityProperties);
         return codeGenerator;
     }
