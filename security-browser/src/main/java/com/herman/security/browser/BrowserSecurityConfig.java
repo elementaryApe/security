@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -57,6 +58,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    private SpringSocialConfigurer hermanSocialSecurityConfig;
+
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
@@ -72,6 +76,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
+                .apply(hermanSocialSecurityConfig)
+                .and()
                 .rememberMe()
                     .tokenRepository(persistentTokenRepository())
                     .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
@@ -82,7 +88,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                             SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                             securityProperties.getBrowser().getLoginPage(),//放行登录页面访问
                             securityProperties.getBrowser().getAuthFailUrl(),//放行认证失败页面访问
-                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*"//放行图片验证码
+                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",//放行图片验证码
+                            securityProperties.getBrowser().getSignUpUrl(),//注册页面,
+                            "/user/register"//注册页面需要调优
                     ).permitAll()
                 .anyRequest()//任何请求
                 .authenticated()//都需要认证

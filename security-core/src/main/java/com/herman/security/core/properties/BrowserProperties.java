@@ -9,6 +9,8 @@ import com.herman.security.core.enums.LoginType;
  **/
 public class BrowserProperties {
 
+    private String signUpUrl="/hermanSignUp.html";
+
     private String loginPage="/hermanLogin.html";
 
     private LoginType loginType= LoginType.JSON;
@@ -48,5 +50,13 @@ public class BrowserProperties {
 
     public void setRememberMeSeconds(int rememberMeSeconds) {
         this.rememberMeSeconds = rememberMeSeconds;
+    }
+
+    public String getSignUpUrl() {
+        return signUpUrl;
+    }
+
+    public void setSignUpUrl(String signUpUrl) {
+        this.signUpUrl = signUpUrl;
     }
 }

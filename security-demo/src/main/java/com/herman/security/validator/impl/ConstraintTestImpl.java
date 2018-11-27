@@ -2,6 +2,8 @@ package com.herman.security.validator.impl;
 
 import com.herman.security.service.HelloService;
 import com.herman.security.validator.ConstraintTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
@@ -14,18 +16,19 @@ import javax.validation.ConstraintValidatorContext;
  * @create 2018-11-16 9:23
  **/
 public class ConstraintTestImpl implements ConstraintValidator<ConstraintTest,Object> {
+    private Logger logger= LoggerFactory.getLogger(getClass());
 
     @Resource
     private HelloService helloService;
     @Override
     public void initialize(ConstraintTest constraintTest) {
-        System.out.println("ConstraintTestImpl init");
+        logger.info("自定义校验注解 ConstraintTestImpl init");
     }
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
         helloService.greeting("tom");
-        System.out.println(value);
+        logger.info("自定义校验注解 ConstraintTestImpl isValid:"+value);
         return false;
     }
 }
