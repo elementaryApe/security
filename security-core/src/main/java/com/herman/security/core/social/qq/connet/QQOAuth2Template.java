@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.charset.Charset;
 
 /**
+ * 链接服务提供商
  * @author hsh
  * @create 2018-11-26 17:13
  **/
@@ -24,6 +25,10 @@ public class QQOAuth2Template extends OAuth2Template {
         setUseParametersForClientAuthentication(true);
     }
 
+    /**
+     * 返回的contentType是html/text，添加相应的HttpMessageConverter来处理
+     * @return
+     */
     @Override
     protected RestTemplate createRestTemplate() {
         RestTemplate restTemplate = super.createRestTemplate();

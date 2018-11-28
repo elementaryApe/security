@@ -37,23 +37,32 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    /**
+     * 设置默认注册jdbc
+     */
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository jdbcUsersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-        if(connectionSignUp!=null){
+        if(connectionSignUp!=null){//判断是否实现了ConnectionSignUp接口，如果实现则登录时发现未注册，自动注册用户
             jdbcUsersConnectionRepository.setConnectionSignUp(connectionSignUp);
         }
         return jdbcUsersConnectionRepository;
     }
 
+    /**
+     * 加载配置
+     */
     @Bean
     public SpringSocialConfigurer hermanSocialSecurityConfig() {
-        String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
+        String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();//自定义拦截地址
         HermanSpringSocialConfigurer hermanSpringSocialConfigurer = new HermanSpringSocialConfigurer(filterProcessesUrl);
-        hermanSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        hermanSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());//设置自定义注册地址
         return hermanSpringSocialConfigurer;
     }
 
+    /**
+     * 加载工具类，实现自动注册用户
+     */
     @Bean
     public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
         return new ProviderSignInUtils(connectionFactoryLocator, getUsersConnectionRepository(connectionFactoryLocator));

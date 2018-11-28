@@ -1,7 +1,5 @@
 package com.herman.security.core.properties;
 
-import com.herman.security.core.properties.ImageCodeProperties;
-
 /**
  * 验证码校验配置
  *
@@ -10,9 +8,9 @@ import com.herman.security.core.properties.ImageCodeProperties;
  **/
 public class ValidateCodeProperties {
 
-    private ImageCodeProperties image=new ImageCodeProperties();
+    private ImageCodeProperties image = new ImageCodeProperties();
 
-    private SmsCodeProperties sms=new SmsCodeProperties();
+    private SmsCodeProperties sms = new SmsCodeProperties();
 
     public ImageCodeProperties getImage() {
         return image;

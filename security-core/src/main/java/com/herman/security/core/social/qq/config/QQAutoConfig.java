@@ -12,6 +12,7 @@ import org.springframework.social.connect.ConnectionFactory;
 import javax.sql.DataSource;
 
 /**
+ * social集成qq整体配置
  * @author hsh
  * @create 2018-11-26 11:50
  **/
@@ -21,10 +22,6 @@ public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
-
-    @Qualifier("dataSource")
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     protected ConnectionFactory<?> createConnectionFactory() {

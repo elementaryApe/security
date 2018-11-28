@@ -8,6 +8,7 @@ import org.springframework.social.connect.UserProfile;
 
 /**
  * 配置qq用户适配到social
+ *
  * @author hsh
  * @create 2018-11-26 9:59
  **/
@@ -20,11 +21,11 @@ public class QQAdapter implements ApiAdapter<QQ> {
 
     @Override
     public void setConnectionValues(QQ qqApi, ConnectionValues connectionValues) {
-            QQUserInfo userInfo = qqApi.getUserInfo();
-            connectionValues.setDisplayName(userInfo.getNickname());//用户名;
-            connectionValues.setImageUrl(userInfo.getFigureurl_qq_1());//头像
-            connectionValues.setProfileUrl(null);
-            connectionValues.setProviderUserId(userInfo.getOpenId());
+        QQUserInfo userInfo = qqApi.getUserInfo();
+        connectionValues.setDisplayName(userInfo.getNickname());//用户名;
+        connectionValues.setImageUrl(userInfo.getFigureurl_qq_1());//头像
+        connectionValues.setProfileUrl(null);
+        connectionValues.setProviderUserId(userInfo.getOpenId());
     }
 
     @Override
