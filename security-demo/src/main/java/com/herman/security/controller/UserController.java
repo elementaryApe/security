@@ -5,6 +5,8 @@ import com.herman.security.entity.User;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -32,6 +34,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+    private Logger logger= LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
@@ -116,7 +119,7 @@ public class UserController {
     @JsonView(User.UserDetailView.class)
     public User getInfo(@PathVariable(value = "id") String id) {
 //        throw new UserNotExistException("user not exist");
-        System.out.println("进入 getInfo");
+        logger.info("进入 getInfo");
         User user = new User();
         user.setUserName("tom");
         return user;

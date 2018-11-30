@@ -1,15 +1,17 @@
 package com.herman.security.core.validate.code.base;
 
-import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 验证码
+ *
  * @author hsh
  * @create 2018-11-20 9:37
  **/
-public class ValidateCode {
+public class ValidateCode implements Serializable {
 
+    private static final long serialVersionUID = -8843541321102924860L;
     /**
      * 验证码
      */

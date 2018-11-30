@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @create 2018-11-20 9:37
  **/
 public class ImageCode extends ValidateCode {
-
+    private static final long serialVersionUID = 881571384579690885L;
     /**
      * 图片
      */
