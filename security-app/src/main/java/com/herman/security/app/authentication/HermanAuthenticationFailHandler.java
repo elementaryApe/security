@@ -1,10 +1,10 @@
-package com.herman.security.browser.authentication;
+package com.herman.security.app.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.herman.security.core.support.SimpleResponse;
 import com.herman.security.core.enums.LoginType;
-import com.herman.security.core.properties.SecurityProperties;
 import com.herman.security.core.exception.ValidateCodeException;
+import com.herman.security.core.properties.SecurityProperties;
+import com.herman.security.core.support.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

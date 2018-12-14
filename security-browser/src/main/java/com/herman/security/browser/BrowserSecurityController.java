@@ -1,9 +1,9 @@
 package com.herman.security.browser;
 
-import com.herman.security.browser.support.SimpleResponse;
-import com.herman.security.browser.support.SocialUserInfo;
 import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.properties.SecurityProperties;
+import com.herman.security.core.support.SimpleResponse;
+import com.herman.security.core.support.SocialUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

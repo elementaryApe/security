@@ -1,6 +1,7 @@
 package com.herman.security.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.herman.security.app.social.util.AppSignUpUtils;
 import com.herman.security.entity.User;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -10,15 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -34,25 +31,30 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
-    private Logger logger= LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+
+//    @Autowired
+//    private ProviderSignInUtils providerSignInUtils;//基于session获取第三方用户信息
 
     @Autowired
-    private ProviderSignInUtils providerSignInUtils;
+    private AppSignUpUtils appSignUpUtils;//app依赖，基于redis获取第三方用户信息,AppSecurityController
 
 
     @PostMapping(value = "/register")
-    public void register(User user, HttpServletRequest request){
+    public void register(User user, HttpServletRequest request) {
         //注册用户 不管是注册用户还是绑定用户，都会拿到一个用户唯一标识
         String userName = user.getUserName();
-        providerSignInUtils.doPostSignUp(userName,new ServletWebRequest(request));
-
+//        providerSignInUtils.doPostSignUp(userName,new ServletWebRequest(request));
+        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userName);
+        //注册成功即登录逻辑
     }
 
     /**
      * 获取当前用户
      */
     @GetMapping(value = "/me")
-    public Object getCurrentUser(@AuthenticationPrincipal UserDetails authentication){
+    public Object getCurrentUser(@AuthenticationPrincipal UserDetails authentication) {
 //        SecurityContextHolder.getContext().getAuthentication();
         return authentication;
     }
@@ -96,8 +98,8 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String"),
             @ApiImplicitParam(name = "size", value = "每页数量", defaultValue = "10", dataType = "String"),
-            @ApiImplicitParam(name = "page", value = "当前页",defaultValue = "10", dataType = "String"),
-            @ApiImplicitParam(name = "sort", value = "排序条件",defaultValue = "username", dataType = "String")
+            @ApiImplicitParam(name = "page", value = "当前页", defaultValue = "10", dataType = "String"),
+            @ApiImplicitParam(name = "sort", value = "排序条件", defaultValue = "username", dataType = "String")
     })
     @GetMapping
     @JsonView(User.UserSimpleView.class)
@@ -112,7 +114,6 @@ public class UserController {
         list.add(new User());
         return list;
     }
-
 
 
     @GetMapping(value = "/{id:\\d+}")

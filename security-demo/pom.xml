@@ -13,9 +13,14 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.herman.security</groupId>-->
+            <!--<artifactId>security-browser</artifactId>-->
+            <!--<version>${herman.security.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.herman.security</groupId>
-            <artifactId>security-browser</artifactId>
+            <artifactId>security-app</artifactId>
             <version>${herman.security.version}</version>
         </dependency>
         <dependency>

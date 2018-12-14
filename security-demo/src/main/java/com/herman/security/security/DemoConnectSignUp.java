@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
  * @author hsh
  * @create 2018-11-27 17:55
  **/
-@Component
-public class DemoConnectSignUp implements ConnectionSignUp {
+//@Component
+public class DemoConnectSignUp /*implements ConnectionSignUp*/ {
 
-    @Override
+//    @Override
     public String execute(Connection<?> connection) {
         //根据社交用户信息默认创建用户并返回用户唯一标识
         return connection.getDisplayName();

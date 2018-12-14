@@ -37,6 +37,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     /**
      * 设置默认注册jdbc
      */
@@ -57,6 +60,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();//自定义拦截地址
         HermanSpringSocialConfigurer hermanSpringSocialConfigurer = new HermanSpringSocialConfigurer(filterProcessesUrl);
         hermanSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());//设置自定义注册地址
+        hermanSpringSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return hermanSpringSocialConfigurer;
     }
 

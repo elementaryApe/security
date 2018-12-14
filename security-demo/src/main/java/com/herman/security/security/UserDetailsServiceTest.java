@@ -46,6 +46,6 @@ public class UserDetailsServiceTest implements UserDetailsService ,SocialUserDet
         String password = passwordEncoder.encode("123456");
         logger.info("数据库密码是："+password);
         return new SocialUser(userId,password,true,true,true,true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
     }
 }

@@ -1,4 +1,4 @@
-package com.herman.security.browser.support;
+package com.herman.security.core.support;
 
 /**
  * @author hsh

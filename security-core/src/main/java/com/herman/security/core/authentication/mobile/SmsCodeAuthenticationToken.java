@@ -7,6 +7,7 @@ import org.springframework.security.core.SpringSecurityCoreVersion;
 import java.util.Collection;
 
 /**
+ * 短信验证码认证信息存放
  * @author hsh
  * @create 2018-11-21 15:47
  **/

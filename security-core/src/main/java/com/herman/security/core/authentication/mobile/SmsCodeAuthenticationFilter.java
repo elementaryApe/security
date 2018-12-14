@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 短信认证过滤器
  * @author hsh
  * @create 2018-11-21 16:57
  **/

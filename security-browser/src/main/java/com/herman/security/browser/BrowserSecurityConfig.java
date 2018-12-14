@@ -57,11 +57,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected AuthenticationFailureHandler failureHandler;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Autowired
     private SpringSocialConfigurer hermanSocialSecurityConfig;
 

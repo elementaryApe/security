@@ -1,12 +1,10 @@
 package com.herman.security.browser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.herman.security.browser.support.SimpleResponse;
-import com.herman.security.core.properties.SecurityProperties;
+import com.herman.security.core.support.SimpleResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
