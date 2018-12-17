@@ -24,6 +24,11 @@
             <!--<version>${herman.security.version}</version>-->
         <!--</dependency>-->
         <dependency>
+            <groupId>com.herman.security</groupId>
+            <artifactId>security-authorize</artifactId>
+            <version>${herman.security.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>

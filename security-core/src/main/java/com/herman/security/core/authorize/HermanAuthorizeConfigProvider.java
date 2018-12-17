@@ -4,6 +4,7 @@ import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  * @create 2018-12-17 16:35
  **/
 @Component
+@Order(Integer.MIN_VALUE)
 public class HermanAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Autowired
