@@ -2,6 +2,7 @@ package com.herman.security.app;
 
 import com.herman.security.app.social.openId.OpenIdAuthenticationSecurityConfig;
 import com.herman.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.herman.security.core.authorize.AuthorizeConfigManger;
 import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.properties.SecurityProperties;
 import com.herman.security.core.validate.code.base.ValidateCodeSecurityConfig;
@@ -45,6 +46,9 @@ public class HermanResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Autowired
     private OpenIdAuthenticationSecurityConfig openIdAuthenticationSecurityConfig;
 
+    @Autowired
+    private AuthorizeConfigManger authorizeConfigManger;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.formLogin()//表单登录
@@ -60,20 +64,7 @@ public class HermanResourceServerConfig extends ResourceServerConfigurerAdapter 
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()//请求授权
-                .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,//放行跳转登录页面访问
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),//放行登录页面访问
-                        securityProperties.getBrowser().getAuthFailUrl(),//放行认证失败页面访问
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",//放行图片验证码
-                        securityProperties.getBrowser().getSignUpUrl(),//注册页面,
-                        "/user/register",
-                        "/social/signUp"//注册页面需要调优
-
-                ).permitAll()
-                .anyRequest()//任何请求
-                .authenticated()//都需要认证
-                .and()
                 .csrf().disable();//跨站信息防护
+        authorizeConfigManger.config(http.authorizeRequests());
     }
 }

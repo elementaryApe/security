@@ -1,5 +1,6 @@
 package com.herman.security.app;
 
+import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.social.HermanSpringSocialConfigurer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -27,7 +28,7 @@ public class SpringSocialConfigurerProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (StringUtils.equals(beanName, "hermanSocialSecurityConfig")) {
             HermanSpringSocialConfigurer configurer = (HermanSpringSocialConfigurer)bean;
-            configurer.signupUrl("/social/signUp");
+            configurer.signupUrl(SecurityConstants.DEFAULT_GET_SOCIAL_USER_INFO);
             return configurer;
         }
         return bean;

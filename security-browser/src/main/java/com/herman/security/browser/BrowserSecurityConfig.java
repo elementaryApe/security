@@ -2,6 +2,7 @@ package com.herman.security.browser;
 
 import com.herman.security.core.authentication.AbstractChannelSecurityConfig;
 import com.herman.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.herman.security.core.authorize.AuthorizeConfigManger;
 import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.properties.SecurityProperties;
 import com.herman.security.core.validate.code.base.ValidateCodeSecurityConfig;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -69,6 +71,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
 
+    @Autowired
+    private AuthorizeConfigManger authorizeConfigManger;
+
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
@@ -104,20 +109,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessHandler(logoutSuccessHandler)//退出处理器
                     .deleteCookies(securityProperties.getBrowser().getDeleteCookies())//退出时删除的cookie
                     .and()
-                .authorizeRequests()//请求授权
-                    .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,//放行跳转登录页面访问
-                            SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                            securityProperties.getBrowser().getLoginPage(),//放行登录页面访问
-                            securityProperties.getBrowser().getAuthFailUrl(),//放行认证失败页面访问
-                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",//放行图片验证码
-                            securityProperties.getBrowser().getSignUpUrl(),//注册页面,
-                            "/user/register",//注册页面需要调优
-                            securityProperties.getBrowser().getSession().getSessionInvalidUrl(),//session失效时跳转的地址
-                            StringUtils.isNotEmpty(securityProperties.getBrowser().getSignOutUrl())?securityProperties.getBrowser().getSignOutUrl():"/signOut"//退出页面
-                    ).permitAll()
-                .anyRequest()//任何请求
-                .authenticated()//都需要认证
-                    .and()
                 .csrf().disable();//跨站信息防护
+        authorizeConfigManger.config(http.authorizeRequests());
     }
 }

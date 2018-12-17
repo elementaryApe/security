@@ -1,6 +1,7 @@
 package com.herman.security.app.social;
 
 import com.herman.security.app.social.util.AppSignUpUtils;
+import com.herman.security.core.properties.SecurityConstants;
 import com.herman.security.core.support.SocialUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class AppSecurityController {
     @Autowired
     private AppSignUpUtils appSignUpUtils;
 
-    @GetMapping("/social/signUp")
+    @GetMapping(SecurityConstants.DEFAULT_GET_SOCIAL_USER_INFO)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
         SocialUserInfo userInfo = new SocialUserInfo();

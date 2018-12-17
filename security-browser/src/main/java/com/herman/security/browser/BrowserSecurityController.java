@@ -71,7 +71,7 @@ public class BrowserSecurityController {
      * @param request
      * @return
      */
-    @GetMapping(value = "/social/user")
+    @GetMapping(value = SecurityConstants.DEFAULT_GET_SOCIAL_USER_INFO)
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request){
         SocialUserInfo socialUserInfo = new SocialUserInfo();
         Connection<?> connectionFromSession = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));

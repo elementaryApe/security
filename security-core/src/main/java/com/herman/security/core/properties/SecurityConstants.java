@@ -67,4 +67,9 @@ public interface SecurityConstants {
      * 系统提供商ID
      */
     String DEFAULT_PARAMETER_NAME_PROVIDERID="providerId";
+
+    /**
+     * 三方登录时获取第三方账号信息
+     */
+    String DEFAULT_GET_SOCIAL_USER_INFO="/social/signUp";
 }

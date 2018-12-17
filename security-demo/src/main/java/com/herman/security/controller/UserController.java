@@ -1,7 +1,6 @@
 package com.herman.security.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.herman.security.app.social.util.AppSignUpUtils;
 import com.herman.security.core.properties.SecurityProperties;
 import com.herman.security.entity.User;
 import io.jsonwebtoken.Claims;
@@ -18,6 +17,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -43,19 +43,19 @@ public class UserController {
     @Autowired
     private SecurityProperties securityProperties;
 
-//    @Autowired
-//    private ProviderSignInUtils providerSignInUtils;//基于session获取第三方用户信息
-
     @Autowired
-    private AppSignUpUtils appSignUpUtils;//app依赖，基于redis获取第三方用户信息,AppSecurityController
+    private ProviderSignInUtils providerSignInUtils;//基于session获取第三方用户信息
+
+//    @Autowired
+//    private AppSignUpUtils appSignUpUtils;//app依赖，基于redis获取第三方用户信息,AppSecurityController
 
 
     @PostMapping(value = "/register")
     public void register(User user, HttpServletRequest request) {
         //注册用户 不管是注册用户还是绑定用户，都会拿到一个用户唯一标识
         String userName = user.getUserName();
-//        providerSignInUtils.doPostSignUp(userName,new ServletWebRequest(request));
-        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userName);
+        providerSignInUtils.doPostSignUp(userName, new ServletWebRequest(request));
+//        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userName);
         //注册成功即登录逻辑
     }
 
@@ -72,7 +72,7 @@ public class UserController {
      * 获取当前用户
      */
     @GetMapping(value = "/jwt/me")
-    public Object getAppCurrentUser(Authentication authentication,HttpServletRequest request) throws UnsupportedEncodingException {
+    public Object getAppCurrentUser(Authentication authentication, HttpServletRequest request) throws UnsupportedEncodingException {
 //        SecurityContextHolder.getContext().getAuthentication();
         String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
 
