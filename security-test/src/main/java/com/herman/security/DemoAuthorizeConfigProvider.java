@@ -1,4 +1,4 @@
-package com.herman.security.security;
+package com.herman.security;
 
 import com.herman.security.core.authorize.AuthorizeConfigProvider;
 import org.springframework.core.annotation.Order;

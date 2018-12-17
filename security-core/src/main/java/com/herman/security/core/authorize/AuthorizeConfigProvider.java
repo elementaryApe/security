@@ -8,6 +8,11 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  */
 public interface AuthorizeConfigProvider {
 
-    void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
+    /**
+     * 存在anyRequest 配置返回true
+     * @param config
+     * @return
+     */
+    boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
 
 }

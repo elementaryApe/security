@@ -21,7 +21,7 @@ public class HermanAuthorizeConfigProvider implements AuthorizeConfigProvider {
     private SecurityProperties securityProperties;
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config.antMatchers(
                 SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,//放行跳转登录页面访问
                 SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
@@ -34,5 +34,6 @@ public class HermanAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 StringUtils.isNotEmpty(securityProperties.getBrowser().getSignOutUrl())?securityProperties.getBrowser().getSignOutUrl():"/signOut",//退出页面
                 SecurityConstants.DEFAULT_GET_SOCIAL_USER_INFO//三方登录时获取第三方账号信息
         ).permitAll();
+        return false;
     }
 }

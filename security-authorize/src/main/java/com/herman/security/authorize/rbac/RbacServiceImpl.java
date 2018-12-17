@@ -25,6 +25,7 @@ public class RbacServiceImpl implements RbacService {
 //            String username = ((UserDetails) principal).getUsername();
             //读取用户所拥有的所有URL
             Set<String> urls = new HashSet<>();
+            urls.add("/user/*");
             for (String url:urls) {
                 if(antPathMatcher.match(url,request.getRequestURI())){
                     hasPermission =true;
