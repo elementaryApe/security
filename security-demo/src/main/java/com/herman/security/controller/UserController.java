@@ -2,15 +2,20 @@ package com.herman.security.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.herman.security.app.social.util.AppSignUpUtils;
+import com.herman.security.core.properties.SecurityProperties;
 import com.herman.security.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
@@ -19,6 +24,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +39,9 @@ import java.util.List;
 public class UserController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+
+    @Autowired
+    private SecurityProperties securityProperties;
 
 //    @Autowired
 //    private ProviderSignInUtils providerSignInUtils;//基于session获取第三方用户信息
@@ -56,6 +65,24 @@ public class UserController {
     @GetMapping(value = "/me")
     public Object getCurrentUser(@AuthenticationPrincipal UserDetails authentication) {
 //        SecurityContextHolder.getContext().getAuthentication();
+        return authentication;
+    }
+
+    /**
+     * 获取当前用户
+     */
+    @GetMapping(value = "/jwt/me")
+    public Object getAppCurrentUser(Authentication authentication,HttpServletRequest request) throws UnsupportedEncodingException {
+//        SecurityContextHolder.getContext().getAuthentication();
+        String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
+
+        Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+                .parseClaimsJws(token).getBody();
+
+        String company = (String) claims.get("author");
+
+        logger.info(company);
+
         return authentication;
     }
 
