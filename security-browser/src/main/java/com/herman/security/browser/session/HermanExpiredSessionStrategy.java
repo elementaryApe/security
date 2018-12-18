@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 
 /**
- * session 失效处理
+ * 并发登录导致session失效时，默认的处理策略
  *
  * @author hsh
  * @create 2018-11-30 10:08

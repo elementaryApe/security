@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.servlet.Filter;
 
 /**
+ * 校验码相关安全配置
+ *
  * @author hsh
  * @create 2018-11-22 16:00
  **/

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 验证机制持有者
+ * 校验码处理器管理器
  * @author hsh
  * @create 2018-11-22 14:20
  **/

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * app注册工具类
+ * app环境下替换providerSignInUtils，避免由于没有session导致读不到社交用户信息的问题
  *
  * @author hsh
  * @create 2018-12-13 17:30

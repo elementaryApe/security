@@ -19,6 +19,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
+ * 社交登录配置主类
  * @author hsh
  * @create 2018-11-26 10:13
  **/

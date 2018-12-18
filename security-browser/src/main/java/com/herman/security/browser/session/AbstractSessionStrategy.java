@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * session处理
+ * 抽象的session失效处理器
  *
  * @author hsh
  * @create 2018-11-30 10:52

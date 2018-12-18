@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * 默认的授权配置管理器
  * @author hsh
  * @create 2018-12-17 16:41
  **/

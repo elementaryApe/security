@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * 图片验证码生成器实现类
+ * 默认的图片验证码生成器
  *
  * @author hsh
  * @create 2018-11-20 14:31

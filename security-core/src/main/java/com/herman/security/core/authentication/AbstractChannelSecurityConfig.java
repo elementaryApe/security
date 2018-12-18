@@ -8,15 +8,14 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
+ * 表单登录配置
  * @author hsh
  * @create 2018-11-22 15:14
  **/
 public class AbstractChannelSecurityConfig  extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     protected AuthenticationSuccessHandler hermanAuthenticationSuccessHandler;
 
-    @Autowired
     protected AuthenticationFailureHandler hermanAuthenticationFailureHandler;
 
 

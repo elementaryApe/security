@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 /**
- * 短信验证登录
+ * 短信验证登录配置
  *
  * @author hsh
  * @create 2018-11-22 9:39

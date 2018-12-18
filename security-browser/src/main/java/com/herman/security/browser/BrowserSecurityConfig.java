@@ -29,7 +29,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
- * 认证信息配置
+ * 浏览器环境下安全配置主类
  *
  * @author hsh
  * @create 2018-11-17 9:25

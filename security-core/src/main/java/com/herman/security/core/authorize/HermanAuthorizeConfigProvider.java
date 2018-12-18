@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.stereotype.Component;
 
 /**
+ * 核心模块的授权配置提供器，安全模块涉及的url的授权配置在这里。
+ *
  * @author hsh
  * @create 2018-12-17 16:35
  **/

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * session过期处理
+ *  默认的session失效处理策略
  *
  * @author hsh
  * @create 2018-11-30 10:54

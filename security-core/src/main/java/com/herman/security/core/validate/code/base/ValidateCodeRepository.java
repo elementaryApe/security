@@ -4,7 +4,7 @@ import com.herman.security.core.enums.ValidateCodeType;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * 短信验证码保存接口
+ * 校验码存取器
  * @author hsh
  * @create 2018-12-01 15:58
  **/
